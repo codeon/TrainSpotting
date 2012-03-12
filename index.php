@@ -20,9 +20,11 @@ echo "<head>
      <body>";
 if(isset($_GET['txtweb-message']))     $message = $_GET['txtweb-message']; 
 echo $message;
-/*
-$srcl=strtoupper($_GET['src']);
-$destl=strtoupper($_GET['dest']);
+$input=explode(" ",$message);
+if (count($input) >=2)
+{
+$srcl=strtoupper($input[0]);
+$destl=strtoupper($input[1]);
 
 
 $src = "http://www.trainenquiry.com/Departure_Display.aspx?sel_val=". $srcl ."+&queryDisplay=MATHURA+JN%2c+MTJ+&time=24&name=&code=";
@@ -91,7 +93,7 @@ foreach($raw2->find('div#pnlGrid') as $element)
 		echo "new<br/>";
 		print_r($mainarray2);
 */
-/*
+
 
 foreach($mainarray as $value)
 {
@@ -105,7 +107,12 @@ foreach($mainarray as $value)
 		 
 		 }
 }		
-	*/	
+		
+}
+else
+{
+	echo "Source and destination station missing";
+}
 	echo "</body>";
 		
 ?>
