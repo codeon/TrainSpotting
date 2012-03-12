@@ -19,7 +19,7 @@ echo "<head>
       </head>        
      <body>";
 if(isset($_GET['txtweb-message']))     $message = $_GET['txtweb-message']; 
-echo $message;
+
 $input=explode(" ",$message);
 if (count($input) >=2)
 {
@@ -101,7 +101,7 @@ foreach($mainarray as $value)
 	    {
 	    if($value[0]==$value2[0])
 	    {
-	         print_r( $value);
+	         echo $value[0]." ".$value[1]." ".$value[2]."<br/>";
 		     break;
 		 }
 		 
