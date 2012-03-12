@@ -14,7 +14,10 @@ $aContext = array(
 );
 $cxContext = stream_context_create($aContext);
 */
-
+echo "<head>           
+          <meta name=\"txtweb-appkey\" content=\"1f62495c-a7db-4625-bfba-969f0d25b419\">
+      </head>        
+     <body>";
 if(isset($_GET['txtweb-message']))     $message = $_GET['txtweb-message']; 
 echo $message;
 /*
@@ -103,5 +106,6 @@ foreach($mainarray as $value)
 		 }
 }		
 	*/	
+	echo "</body>";
 		
 ?>
