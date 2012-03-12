@@ -1,6 +1,7 @@
 <?php 
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
+ini_set('allow_url_fopen', '1');
 include('simple_html_dom.php');
 /*
 $auth = base64_encode('<username>:<pasword>');
@@ -13,6 +14,10 @@ $aContext = array(
 );
 $cxContext = stream_context_create($aContext);
 */
+
+if(isset($_GET['txtweb-message']))     $message = $_GET['txtweb-message']; 
+echo $message;
+/*
 $srcl=strtoupper($_GET['src']);
 $destl=strtoupper($_GET['dest']);
 
@@ -83,7 +88,7 @@ foreach($raw2->find('div#pnlGrid') as $element)
 		echo "new<br/>";
 		print_r($mainarray2);
 */
-
+/*
 
 foreach($mainarray as $value)
 {
@@ -97,6 +102,6 @@ foreach($mainarray as $value)
 		 
 		 }
 }		
-		
+	*/	
 		
 ?>
