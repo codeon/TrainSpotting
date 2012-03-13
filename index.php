@@ -19,7 +19,7 @@ echo "<head>
       </head>        
      <body>";
 if(isset($_GET['txtweb-message']))     $message = $_GET['txtweb-message']; 
-else $message = "cnb ndls";
+else $message = "";
 
 $input=explode(" ",$message);
 if (count($input) >=2)
