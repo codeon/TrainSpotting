@@ -76,13 +76,13 @@ if (count($input) >=2)
 			$cnt++;
 		}
 	}
-	print_r($mainarray2);
+	echo "Trains from ".$srcl." to ".$destl." with their actual departure time<br />"  ;
 	foreach($mainarray as $value)
 	{
-		
 	    if(in_array($value[0] ,$mainarray2) )
 	    {
-			echo $value[0]." ".$value[1]." ".$value[2]."<br/>\n";
+			$date=explode(",</br>" , $value[2]);
+			echo $value[0]." ".$value[1]." ".$date[0]." ".$date[1]."<br/>";
 		}
 	}
 }				
