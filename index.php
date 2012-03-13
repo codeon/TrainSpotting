@@ -19,6 +19,7 @@ echo "<head>
       </head>        
      <body>";
 if(isset($_GET['txtweb-message']))     $message = $_GET['txtweb-message']; 
+else $message = "cnb ndls";
 
 $input=explode(" ",$message);
 if (count($input) >=2)
@@ -28,7 +29,7 @@ $destl=strtoupper($input[1]);
 
 
 $src = "http://www.trainenquiry.com/Departure_Display.aspx?sel_val=". $srcl ."+&queryDisplay=MATHURA+JN%2c+MTJ+&time=24&name=&code=";
-$dest = "http://www.trainenquiry.com/Departure_Display.aspx?sel_val=". $destl ."+&queryDisplay=M%2c+MTJ+&time=48&name=&code=";
+$dest = "http://www.trainenquiry.com/PassingThroughTrains_Display.aspx?sel_val=". $destl ."+&queryDisplay=M%2c+MTJ+&time=32&name=&code=";
 //echo $src;
 $raw = file_get_html($src);
 $mainarray=array();
@@ -98,17 +99,80 @@ foreach($raw2->find('div#pnlGrid') as $element)
 foreach($mainarray as $value)
 {
 	foreach($mainarray2 as $value2)
-	    {
+	{
 	    if($value[0]==$value2[0])
 	    {
-	         echo $value[0]." ".$value[1]." ".$value[2]."<br/>";
-		     break;
-		 }
+			//print_r($value2[2]);
+			if (trim($value2[2]) == "Destination Station")
+			{
+							echo $value[0]." ".$value[1]." ".$value[2]."<br/>\n";
+							break;
+			}
+			$srcdate=explode(",</br>" , trim($value[2]));
+			$destdate=explode("," , trim($value2[2]));
+			$srcdatmon=explode(" ",trim($srcdate[1]));
+			$destdatmon=explode(" ",trim($destdate[1]));
+			$srchrmin=explode(":",trim($srcdate[0]));
+			$desthrmin=explode(":",trim($destdate[0]));
+		//	print_r($destdate);
+		//	print_r($destdatmon);
+			//print_r($srchrmin);
+	//		print_r($desthrmin);
+
+			if($srcdatmon[1]==$destdatmon[1])					// checking month
+			{
+				if(intval($srcdatmon[0])==intval($destdatmon[0])) // checking date
+				{
+					if(intval($srchrmin[0])==intval($desthrmin[0])) // checking hour
+					{
+						if(intval($srchrmin[1])<intval($desthrmin[1])) // checking minutes
+						{
+							echo $value[0]." ".$value[1]." ".$value[2]."<br/>\n";
+							break;
+						}
+						else
+						{
+							continue;
+						}
+					}
+					else if(intval($srchrmin[0])< intval($desthrmin[0]))
+					{
+/*
+						print_r($srcdatmon);
+						print_r($srchrmin);
+						print_r($desthrmin);
+						print_r($destdatmon);
+*/
+						echo $value[0]." ".$value[1]." ".$value[2]."<br/>\n";
+						break;
+					}
+					else
+					{
+						continue;
+					}
+				}
+				else if(intval($srcdatmon[0])<intval($destdatmon[0]))
+				{
+					echo $value[0]." ".$value[1]." ".$value[2]."<br/>\n";
+					break;
+				}
+				else
+				{
+					continue;
+				}
+			}
+			else if(intval($srcdatmon[0])>intval($destdatmon[0]))
+			{
+				echo $value[0]." ".$value[1]." ".$value[2]."<br/>\n";
+				break;
+			}
+		}	
+					
+}
 		 
 		 }
 }		
 		
-}
 else
 {
 	echo "Source and destination station missing";
