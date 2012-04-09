@@ -26,8 +26,8 @@ if (count($input) >=2)
 {
 	$srcl=strtoupper($input[0]);
 	$destl=strtoupper($input[1]);
-	$src = "http://www.trainenquiry.com/Departure_Display.aspx?sel_val=". $srcl ."+&queryDisplay=MATHURA+JN%2c+MTJ+&time=24&name=&code=";
-	$trains="http://www.trainenquiry.com/TrainsBetw2St_Display.aspx?station1=". $srcl ."+&station2=". $destl ."+&queryDisplay1=KANPUR+CENTRAL%2c+CNB+&queryDisplay2=MATHURA+JN%2c+MTJ+";
+	$src = "http://www.trainenquiry.com/o/Departure_Display.aspx?sel_val=". $srcl ."+&queryDisplay=MATHURA+JN%2c+MTJ+&time=24&name=&code=";
+	$trains="http://www.trainenquiry.com/o/TrainsBetw2St_Display.aspx?station1=". $srcl ."+&station2=". $destl ."+&queryDisplay1=KANPUR+CENTRAL%2c+CNB+&queryDisplay2=MATHURA+JN%2c+MTJ+";
 	$raw = file_get_html($src);
 	$mainarray=array();
 	foreach($raw->find('div#pnlGrid') as $element) 
